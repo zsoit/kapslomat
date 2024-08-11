@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kapslomat</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(14, 14, 14);
+            color: #28a745;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        
+        .congrats-box {
+            background-color: #212529;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        
+        .congrats-box .points-circle {
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #28a745;
+            color: #212529;
+            font-size: 4rem;
+            line-height: 200px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .input-box {
+            text-align: center;
+        }
+        
+        .input-box input {
+            max-width: 300px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="container text-center">
+            <img src="http://juwenalia.pspk.smallhost.pl/logo.png" alt="Duży Obrazek" class="img-fluid w-100">
+        </div>
+        <br><br>
+
+        <!-- Formularz wprowadzania numeru indeksu -->
+        <div class="input-box text-align">
+            <p>#{{data.id_request}}</p>
+            <h1>Wpisz swój numer indeksu</h1>
+            <form id="index-form">
+                <div class="form-group">
+                    <input type="number" id="index-number" class="form-control" maxlength="5" placeholder="00000" required pattern="\d{5}">
+                </div>
+                <button type="submit" class="btn btn-success">Dalej</button>
+            </form>
+        </div>
+
+        <!-- Ekran gratulacyjny -->
+        <div class="congrats-box" id="congrats-box">
+            <h1>Gratulacje!</h1>
+            <p>Zdobywasz</p>
+            <div class="points-circle" id="points">{{data.points}}</div>
+            <p>Kapsli</p>
+            <p class="StudentID"></p>
+            <p class="reference">Numer referencyjny {{data.id_request}}</p>
+            <p>Data: {{data.date}}, godz. {{data.time}}</p>
+        </div>
+    </div>
+
+
+
+    <script>
+        document.getElementById('index-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Pobierz wartość numeru indeksu
+            var indexNumber = document.getElementById('index-number').value;
+
+            // Ukryj formularz
+            document.querySelector('.input-box').style.display = 'none';
+
+            // Pokaż ekran gratulacyjny
+            document.getElementById('congrats-box').style.display = 'block';
+
+            // Ustaw numer referencyjny
+            document.querySelector('.StudentID').textContent = 'Nr albumu U-' + indexNumber;
+
+            // Możesz również dynamicznie ustawić liczbę kapsli i inne dane, np. data i czas
+        });
+    </script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
